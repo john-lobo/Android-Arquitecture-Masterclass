@@ -1,19 +1,16 @@
 package com.techyourchance.mvc.screens.questionslist
 
 import android.content.Context
-import com.techyourchance.mvc.screens.questionslist.QuestionsListAdapter.OnQuestionClickListener
 import android.widget.ArrayAdapter
 import com.techyourchance.mvc.questions.Question
 import android.view.ViewGroup
-import com.techyourchance.mvc.screens.questionslist.QuestionListItemViewMvc
-import com.techyourchance.mvc.screens.questionslist.QuestionListItemViewMvcImpl
 import android.view.LayoutInflater
 import android.view.View
 
 class QuestionsListAdapter(
     context: Context?,
     private val mOnQuestionClickListener: OnQuestionClickListener
-) : ArrayAdapter<Question?>(context!!, 0), QuestionListItemViewMvc.Listener {
+) : ArrayAdapter<Question?>(context!!, 0), QuestionListItemViewContract.Listener {
     interface OnQuestionClickListener {
         fun onQuestionClicked(question: Question?)
     }
@@ -21,7 +18,7 @@ class QuestionsListAdapter(
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var convertView = convertView
         if (convertView == null) {
-            val viewMvc: QuestionListItemViewMvc = QuestionListItemViewMvcImpl(
+            val viewMvc: QuestionListItemViewContract = QuestionListItemView(
                 LayoutInflater.from(context), parent
             )
             viewMvc.registerListener(this)
@@ -31,7 +28,7 @@ class QuestionsListAdapter(
         val question = getItem(position)
 
         // bind the data to views
-        val viewMvc = convertView.tag as QuestionListItemViewMvc
+        val viewMvc = convertView.tag as QuestionListItemViewContract
         viewMvc.bindQuestion(question)
 
         // set listener

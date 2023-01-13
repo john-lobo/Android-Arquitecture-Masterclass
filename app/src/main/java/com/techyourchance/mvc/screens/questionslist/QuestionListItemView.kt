@@ -8,10 +8,10 @@ import android.widget.TextView
 import com.techyourchance.mvc.R
 import com.techyourchance.mvc.questions.Question
 
-class QuestionListItemViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGroup?) :
-    QuestionListItemViewMvc {
+class QuestionListItemView(layoutInflater: LayoutInflater, parent: ViewGroup?) :
+    QuestionListItemViewContract {
     override val rootView: View
-    private val mListener: MutableList<QuestionListItemViewMvc.Listener?> = ArrayList(1)
+    private val mListener: MutableList<QuestionListItemViewContract.Listener?> = ArrayList(1)
     private var mQuestion: Question? = null
     private val mTxtTitle: TextView
     private val mRecyclerQuestions: RecyclerView? = null
@@ -21,9 +21,7 @@ class QuestionListItemViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGr
         rootView = layoutInflater.inflate(R.layout.layout_question_list_item, parent, false)
         mTxtTitle = findViewById(R.id.txt_title)
         rootView.setOnClickListener {
-            for (listener in mListener) {
-                listener!!.onQuestionClicked(mQuestion)
-            }
+            mListener.forEach { it?.onQuestionClicked(mQuestion) }
         }
     }
 
@@ -31,11 +29,11 @@ class QuestionListItemViewMvcImpl(layoutInflater: LayoutInflater, parent: ViewGr
         return rootView.findViewById(id)
     }
 
-    override fun registerListener(listener: QuestionListItemViewMvc.Listener?) {
+    override fun registerListener(listener: QuestionListItemViewContract.Listener?) {
         mListener.add(listener)
     }
 
-    override fun unregisterListener(listener: QuestionListItemViewMvc.Listener?) {
+    override fun unregisterListener(listener: QuestionListItemViewContract.Listener?) {
         mListener.remove(listener)
     }
 

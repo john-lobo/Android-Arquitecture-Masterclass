@@ -1,11 +1,9 @@
 package com.techyourchance.mvc.screens.questionslist
 
 import com.techyourchance.mvc.screens.common.BaseActivity
-import com.techyourchance.mvc.screens.questionslist.QuestionsListViewMvc
 import com.techyourchance.mvc.networking.StackoverflowApi
 import android.os.Bundle
 import android.util.Log
-import com.techyourchance.mvc.screens.questionslist.QuestionsListViewMvcImpl
 import android.view.LayoutInflater
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -20,13 +18,18 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class QuestionsListActivity : BaseActivity(), QuestionsListViewMvc.Listener {
+class QuestionsListActivity : BaseActivity(), QuestionsListViewContract.Listener {
+
     private var mStackoverflowApi: StackoverflowApi? = null
-    private var mViewMvc: QuestionsListViewMvc? = null
+    private var mViewMvc: QuestionsListViewContract? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mViewMvc = QuestionsListViewMvcImpl(LayoutInflater.from(this), null)
-        mViewMvc!!.registerListener(this)
+
+        mViewMvc = QuestionsListView(LayoutInflater.from(this), null).apply {
+            registerListener(this@QuestionsListActivity)
+        }
+
         mStackoverflowApi = Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

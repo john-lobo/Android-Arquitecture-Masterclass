@@ -6,18 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
 import com.techyourchance.mvc.screens.questionslist.QuestionsListAdapter.OnQuestionClickListener
-import com.techyourchance.mvc.screens.questionslist.QuestionsListViewMvc
-import com.techyourchance.mvc.screens.questionslist.QuestionsListAdapter
 import com.techyourchance.mvc.R
 import com.techyourchance.mvc.questions.Question
 import java.util.ArrayList
 
-class QuestionsListViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
-    OnQuestionClickListener, QuestionsListViewMvc {
+class QuestionsListView(inflater: LayoutInflater, parent: ViewGroup?) :
+    OnQuestionClickListener, QuestionsListViewContract {
     override val rootView: View
+
     private val mLstQuestions: ListView
     private val mQuestionsListAdapter: QuestionsListAdapter
-    private val mListeners: MutableList<QuestionsListViewMvc.Listener?> = ArrayList(1)
+    private val mListeners: MutableList<QuestionsListViewContract.Listener?> = ArrayList(1)
 
     init {
         rootView = inflater.inflate(R.layout.layout_questions_list, parent, false)
@@ -33,11 +32,11 @@ class QuestionsListViewMvcImpl(inflater: LayoutInflater, parent: ViewGroup?) :
         return rootView.findViewById(id)
     }
 
-    override fun registerListener(listener: QuestionsListViewMvc.Listener?) {
+    override fun registerListener(listener: QuestionsListViewContract.Listener?) {
         mListeners.add(listener)
     }
 
-    override fun removeListener(listener: QuestionsListViewMvc.Listener?) {
+    override fun removeListener(listener: QuestionsListViewContract.Listener?) {
         mListeners.remove(listener)
     }
 
