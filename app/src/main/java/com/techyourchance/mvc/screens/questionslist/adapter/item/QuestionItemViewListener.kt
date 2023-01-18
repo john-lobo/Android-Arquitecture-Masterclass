@@ -1,9 +1,9 @@
-package com.techyourchance.mvc.screens.questionslist
+package com.techyourchance.mvc.screens.questionslist.adapter.item
 
 import android.view.View
 import com.techyourchance.mvc.questions.Question
 
-interface QuestionListItemViewContract {
+interface QuestionItemViewListener {
 
     val rootView: View?
     fun registerListener(listener: Listener?)

@@ -18,16 +18,16 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class QuestionsListActivity : BaseActivity(), QuestionsListViewContract.Listener {
+class QuestionsActivity : BaseActivity(), QuestionsViewListener.Listener {
 
     private var mStackoverflowApi: StackoverflowApi? = null
-    private var mViewMvc: QuestionsListViewContract? = null
+    private var mViewMvc: QuestionsViewListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mViewMvc = QuestionsListView(LayoutInflater.from(this), null).apply {
-            registerListener(this@QuestionsListActivity)
+        mViewMvc = QuestionsView(LayoutInflater.from(this), null).apply {
+            registerListener(this@QuestionsActivity)
         }
 
         mStackoverflowApi = Retrofit.Builder()

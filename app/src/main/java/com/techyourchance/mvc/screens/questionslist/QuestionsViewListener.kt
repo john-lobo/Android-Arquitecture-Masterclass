@@ -3,7 +3,7 @@ package com.techyourchance.mvc.screens.questionslist
 import android.view.View
 import com.techyourchance.mvc.questions.Question
 
-interface QuestionsListViewContract {
+interface QuestionsViewListener {
     interface Listener {
         fun onQuestionClicked(question: Question?)
     }
@@ -11,5 +11,5 @@ interface QuestionsListViewContract {
     val rootView: View
     fun registerListener(listener: Listener?)
     fun removeListener(listener: Listener?)
-    fun bindQuestions(questions: List<Question?>?)
+    fun bindQuestions(questions: List<Question>)
 }
