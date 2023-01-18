@@ -35,6 +35,7 @@ class QuestionsActivity : BaseActivity(), QuestionsViewListener.Listener {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(StackoverflowApi::class.java)
+
         setContentView(mViewMvc!!.rootView)
     }
 

@@ -1,13 +1,10 @@
 package com.techyourchance.mvc.screens.questionslist.adapter.item
 
-import android.view.View
 import com.techyourchance.mvc.questions.Question
+import com.techyourchance.mvc.screens.common.BaseObservableViewListener
 
-interface QuestionItemViewListener {
+interface QuestionItemViewListener : BaseObservableViewListener<QuestionItemViewListener.Listener>{
 
-    val rootView: View?
-    fun registerListener(listener: Listener?)
-    fun unregisterListener(listener: Listener?)
     fun bindQuestion(question: Question?)
 
     interface Listener {

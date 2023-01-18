@@ -11,17 +11,17 @@ import android.view.LayoutInflater
 class QuestionsRecyclerAdapter(
     private val questions: List<Question>,
     private val inflater: LayoutInflater,
-    private val mOnQuestionClickListener: OnQuestionClickListener
+    private val listener: OnQuestionAdapterLister
 ) : RecyclerView.Adapter<QuestionsRecyclerAdapter.MyViewHolder>(), QuestionItemViewListener.Listener {
 
-    interface OnQuestionClickListener {
+    interface OnQuestionAdapterLister {
         fun onQuestionClicked(question: Question?)
     }
 
     inner class MyViewHolder(val view : QuestionItemView) : RecyclerView.ViewHolder(view.rootView)
 
     override fun onQuestionClicked(question: Question?) {
-        mOnQuestionClickListener.onQuestionClicked(question)
+        listener.onQuestionClicked(question)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {

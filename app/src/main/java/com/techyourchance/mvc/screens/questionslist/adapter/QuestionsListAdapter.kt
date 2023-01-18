@@ -13,6 +13,7 @@ class QuestionsListAdapter(
     context: Context?,
     private val mOnQuestionClickListener: OnQuestionClickListener
 ) : ArrayAdapter<Question?>(context!!, 0), QuestionItemViewListener.Listener {
+
     interface OnQuestionClickListener {
         fun onQuestionClicked(question: Question?)
     }
